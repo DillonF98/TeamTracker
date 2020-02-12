@@ -51,10 +51,15 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+            R.id.nav_home-> toast("You Selected Home")
             R.id.nav_player -> navigateTo(PlayerFragment.newInstance())
             R.id.nav_team -> navigateTo(PlayerListFragment.newInstance())
-            R.id.nav_home-> toast("You Selected Club Info")
+            R.id.nav_fixtures-> toast("You Selected Club Fixtures")
+            R.id.nav_competitors-> toast("You Selected Competitors")
 
+            R.id.nav_records-> toast("You Selected Club Records")
+            R.id.nav_legends-> toast("You Selected Club Legends")
+            R.id.nav_trophies-> toast("You Selected Club Trophies")
 
             else -> toast("You Selected Something Else")
         }

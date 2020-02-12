@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import ie.wit.R
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.models.PlayerModel
-import kotlinx.android.synthetic.main.card_player.*
 import kotlinx.android.synthetic.main.fragment_player.*
 import kotlinx.android.synthetic.main.fragment_player.view.*
 
@@ -46,24 +45,30 @@ class PlayerFragment : Fragment() {
             }
     }
 
-    fun setButtonListener( layout: View) {
+    private fun setButtonListener(layout: View) {
+
         layout.addPlayerButton.setOnClickListener {
-            player.name = playerName.text.toString()
+
+            player.name = pName.text.toString()
             player.position = pPosition.text.toString()
-            //player.age = age.text.toString()
-            //player.yearSigned = yearSigned.text.toString()
-            //player.signingvalue = pSigningValue.text.toString()
-            //player.currentvalue = pCurrentValue.text.toString()
-            //player.nationality = pNationality.text.toString()
+            player.age = pAge.text.toString()
+            player.yearSigned = pYearSigned.text.toString()
+            player.signingValue = pSigningValue.text.toString()
+            player.currentValue = pCurrentValue.text.toString()
+            player.nationality = pNationality.text.toString()
 
-                app.playerStore.create(player.copy())
 
-            player.name = playerName.setText("").toString()
+            app.playerStore.create(player.copy())
+
+
+            player.name = pName.setText("").toString()
             player.age = pPosition.setText("").toString()
+            player.position = pPosition.setText("").toString()
+            player.yearSigned = pYearSigned.setText("").toString()
+            player.signingValue = pSigningValue.setText("").toString()
+            player.currentValue = pCurrentValue.setText("").toString()
+            player.nationality = pNationality.setText("").toString()
 
         }
-        }
-
-
-
+    }
 }

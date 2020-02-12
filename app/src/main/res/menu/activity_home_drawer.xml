@@ -10,17 +10,22 @@
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_player"
+            android:icon="@drawable/ic_menu_addplayer"
+
             android:title="@string/menu_player" />
         <item
             android:id="@+id/nav_team"
+            android:icon="@drawable/ic_menu_ppl"
             android:title="@string/menu_team" />
 
         <item
-            android:id="@+id/nav_leaguelead"
+            android:id="@+id/nav_competitors"
+            android:icon="@drawable/ic_menu_list"
             android:title="@string/menu_leaguelead" />
 
         <item
             android:id="@+id/nav_fixtures"
+            android:icon="@drawable/ic_menu_list"
             android:title="@string/menu_fixtures" />
 
     </group>
@@ -30,14 +35,18 @@
 
 <item
     android:id="@+id/nav_legends"
+    android:icon="@drawable/ic_menu_archive"
     android:title="@string/menu_legends" />
 
 <item
     android:id="@+id/nav_records"
+    android:icon="@drawable/ic_menu_archive"
     android:title="@string/menu_records" />
 
 <item
     android:id="@+id/nav_trophies"
+    android:icon="@drawable/ic_menu_archive"
+
     android:title="@string/menu_trophies" />
     </menu>
 
