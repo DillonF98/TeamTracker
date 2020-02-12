@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_player"
+            android:title="@string/menu_player" />
+        <item
+            android:id="@+id/nav_team"
+            android:title="@string/menu_team" />
+
+        <item
+            android:id="@+id/nav_leaguelead"
+            android:title="@string/menu_leaguelead" />
+
+        <item
+            android:id="@+id/nav_fixtures"
+            android:title="@string/menu_fixtures" />
+
+    </group>
+
+<item android:title="History">
+    <menu>
+
+<item
+    android:id="@+id/nav_legends"
+    android:title="@string/menu_legends" />
+
+<item
+    android:id="@+id/nav_records"
+    android:title="@string/menu_records" />
+
+<item
+    android:id="@+id/nav_trophies"
+    android:title="@string/menu_trophies" />
+    </menu>
+
+</item>
+
+
+</menu>
+
+

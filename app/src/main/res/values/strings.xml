@@ -1,3 +1,40 @@
 <resources>
-    <string name="app_name">TeamTracker</string>
+    <string name="app_name">LFC Team Tracker</string>
+    <string name="action_player">Player</string>
+    <string name="action_report">Biggest Club Signings</string>
+    <string name="teamtrackerTitle">Welcome</string>
+    <string name="teamtrackerSubtitle">LFC Team Tracker</string>
+
+
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Liverpool FC Team Tracker</string>
+    <string name="nav_header_subtitle">All the latest information and statistics</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_player">New Player</string>
+    <string name="menu_team">Current Team</string>
+    <string name="menu_goalcontrib">Goal Contributions</string>
+    <string name="menu_leaguelead">Competitons</string>
+    <string name="menu_fixtures">Fixtures</string>
+    <string name="menu_legends">Club Legends</string>
+    <string name="menu_records">Club Record Holders</string>
+    <string name="menu_trophies">Club Trophies</string>
+
+    <string name="hint_name">Enter Name</string>
+    <string name="hint_position">Enter position</string>
+    <string name="hint_age">Enter Age</string>
+    <string name="hint_yearsigned">Enter Year Signed</string>
+    <string name="hint_signingvalue">Enter Value Signed For</string>
+    <string name="hint_currentvalue">Enter Current Value</string>
+    <string name="hint_nationality">Enter Nationality</string>
+
+    <string name="button_addPlayer">Add Player</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
+

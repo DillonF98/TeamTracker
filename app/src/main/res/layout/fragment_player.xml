@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".teamtracker.fragments.PlayerFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/playerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="@string/hint_name"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/pPosition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="@string/hint_position"
+            android:inputType="textPersonName"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="@string/hint_age"
+            android:inputType="number" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="@string/hint_nationality"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/yearSigned"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="@string/hint_yearsigned"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/pSigningValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="@string/hint_signingvalue"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/pCurrentValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="@string/hint_currentvalue"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/addPlayerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+            android:text="@string/button_addPlayer" />
+
+    </LinearLayout>
+
+</FrameLayout>
