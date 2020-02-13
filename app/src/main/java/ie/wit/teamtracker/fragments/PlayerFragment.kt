@@ -62,7 +62,7 @@ class PlayerFragment : Fragment() {
 
 
             player.name = pName.setText("").toString()
-            player.age = pPosition.setText("").toString()
+            player.age = pAge.setText("").toString()
             player.position = pPosition.setText("").toString()
             player.yearSigned = pYearSigned.setText("").toString()
             player.signingValue = pSigningValue.setText("").toString()

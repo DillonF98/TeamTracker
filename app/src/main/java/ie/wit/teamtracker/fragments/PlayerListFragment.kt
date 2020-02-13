@@ -1,6 +1,7 @@
 package ie.wit.teamtracker.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,8 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.R
 import ie.wit.teamtracker.adapters.PlayerAdapter
 import ie.wit.teamtracker.main.PlayerApp
+import ie.wit.teamtracker.models.PlayerModel
+import kotlinx.android.synthetic.main.fragment_player_list.*
 import kotlinx.android.synthetic.main.fragment_player_list.view.*
-
 
 class PlayerListFragment : Fragment() {
 
@@ -33,6 +35,8 @@ class PlayerListFragment : Fragment() {
         root.recyclerView.adapter = PlayerAdapter(app.playerStore.findAll())
 
         return root
+        loadPlayers()
+
 
     }
 
@@ -42,6 +46,20 @@ class PlayerListFragment : Fragment() {
             PlayerListFragment().apply {
                 arguments = Bundle().apply { }
             }
+    }
+
+    private fun loadPlayers() {
+        showPlayers(app.playerStore.findAll())
+    }
+
+    private fun showPlayers (players: List<PlayerModel>) {
+        recyclerView.adapter = PlayerAdapter(players)
+        recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        loadPlayers()
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }
