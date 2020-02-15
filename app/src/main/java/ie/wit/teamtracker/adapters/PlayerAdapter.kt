@@ -33,8 +33,7 @@ class PlayerAdapter constructor(private var players: List<PlayerModel>)
         fun bind(player: PlayerModel) {
 
             itemView.name.text = player.name
-            itemView.positon.text = player.position
-
+            itemView.position.text = player.position
 
         }
     }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".teamtracker.fragments.PlayerFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/lImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:src="@mipmap/ic_launcher_round"
+                android:contentDescription="TODO" />
+
+            <Button
+                android:id="@+id/addLegendImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="@string/button_addLegendImage" />
+
+            <EditText
+                android:id="@+id/lName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/hint_lname"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/caps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/hint_caps"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/trophiesWon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/hint_trophiesWon"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/yrsAtClub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/hint_yrsAtClub"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/addLegendButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="@string/button_addLegend" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

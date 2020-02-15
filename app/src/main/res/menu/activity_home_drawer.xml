@@ -18,41 +18,49 @@
             android:icon="@drawable/ic_menu_ppl"
             android:title="@string/menu_team" />
 
-        <item
-            android:id="@+id/nav_competitors"
-            android:icon="@drawable/ic_menu_list"
-            android:title="@string/menu_leaguelead" />
-
-        <item
-            android:id="@+id/nav_fixtures"
-            android:icon="@drawable/ic_menu_list"
-            android:title="@string/menu_fixtures" />
-
     </group>
 
-<item android:title="History">
-    <menu>
+    <item android:title="Club History">
+        <menu>
 
-<item
-    android:id="@+id/nav_legends"
-    android:icon="@drawable/ic_menu_archive"
-    android:title="@string/menu_legends" />
+            <item
+                android:id="@+id/nav_history"
+                android:icon="@drawable/ic_menu_archive"
+                android:title="@string/menu_history" />
+            <item
+                android:id="@+id/nav_addTrophies"
+                android:icon="@drawable/ic_menu_archive"
+                android:title="@string/menu_addTrophies" />
 
-<item
-    android:id="@+id/nav_records"
-    android:icon="@drawable/ic_menu_archive"
-    android:title="@string/menu_records" />
+            <item
+                android:id="@+id/nav_trophies"
+                android:icon="@drawable/ic_menu_archive"
+                android:title="@string/menu_trophies" />
+        </menu>
 
-<item
-    android:id="@+id/nav_trophies"
-    android:icon="@drawable/ic_menu_archive"
+    </item>
 
-    android:title="@string/menu_trophies" />
+    <item android:title="Club Legends">
+        <menu>
+
+            <item
+                android:id="@+id/nav_addLegends"
+                android:icon="@drawable/ic_menu_archive"
+                android:title="@string/menu_addLegends" />
+
+            <item
+                android:id="@+id/nav_legends"
+                android:icon="@drawable/ic_menu_archive"
+                android:title="@string/menu_legends" />
+        </menu>
+    </item>
+
+
+
+
     </menu>
 
-</item>
 
 
-</menu>
 
 

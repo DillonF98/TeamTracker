@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import ie.wit.R
+import ie.wit.teamtracker.fragments.LegendFragment
+import ie.wit.teamtracker.fragments.LegendListFragment
 import ie.wit.teamtracker.fragments.PlayerFragment
 import ie.wit.teamtracker.fragments.PlayerListFragment
 import kotlinx.android.synthetic.main.app_bar_home.*
@@ -51,15 +53,18 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+
             R.id.nav_home-> toast("You Selected Home")
             R.id.nav_player -> navigateTo(PlayerFragment.newInstance())
             R.id.nav_team -> navigateTo(PlayerListFragment.newInstance())
-            R.id.nav_fixtures-> toast("You Selected Club Fixtures")
-            R.id.nav_competitors-> toast("You Selected Competitors")
 
-            R.id.nav_records-> toast("You Selected Club Records")
-            R.id.nav_legends-> toast("You Selected Club Legends")
+            R.id.nav_history-> toast("You Selected Club History")
+            R.id.nav_addTrophies-> toast("You Selected Add Trophies")
             R.id.nav_trophies-> toast("You Selected Club Trophies")
+
+            R.id.nav_addLegends -> navigateTo(LegendFragment.newInstance())
+            R.id.nav_legends -> navigateTo(LegendListFragment.newInstance())
+
 
             else -> toast("You Selected Something Else")
         }

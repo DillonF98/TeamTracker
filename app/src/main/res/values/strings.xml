@@ -14,13 +14,15 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_player">New Player</string>
-    <string name="menu_team">Current Team</string>
+    <string name="menu_team">Team</string>
     <string name="menu_goalcontrib">Goal Contributions</string>
     <string name="menu_leaguelead">Competitions</string>
     <string name="menu_fixtures">Fixtures</string>
-    <string name="menu_legends">Club Legends</string>
-    <string name="menu_records">Club Record Holders</string>
+    <string name="menu_addLegends">Add Legend</string>
+    <string name="menu_legends">Legends</string>
+    <string name="menu_history">Overview</string>
     <string name="menu_trophies">Club Trophies</string>
+    <string name="menu_addTrophies">Add Trophie</string>
 
     <string name="hint_name">Enter Name</string>
     <string name="hint_position">Enter position</string>
@@ -35,6 +37,19 @@
 
     <string name="textview_position">Position:</string>
     <string name="textview_name">Name:</string>
+
+
+    <string name="hint_lname">Enter Name</string>
+    <string name="hint_caps">Enter Amount of Appearances</string>
+    <string name="hint_trophiesWon">Enter Amount of Trophies Won</string>
+    <string name="hint_yrsAtClub">Enter Number of Years Spent at Club</string>
+
+    <string name="button_addLegend">Add Legend</string>
+    <string name="button_addLegendImage">Add Legend Image</string>
+
+    <string name="action_legend">Legend</string>
+
+
 
 </resources>
 
