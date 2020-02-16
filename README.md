@@ -61,10 +61,6 @@ the Name, Amount of Appearances, Trophies won at the club and Amount of years th
 * Android Studio
 * Kotlin
 
-## Contributing
-
-
-
 ## Author
 
 * @Dillon Feehan 
@@ -74,6 +70,5 @@ the Name, Amount of Appearances, Trophies won at the club and Amount of years th
 * StudentID : 20080310
 * Github Link: https://github.com/dillonf98
 
-## Acknowledgments
 
 
