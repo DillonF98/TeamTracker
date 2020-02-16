@@ -9,6 +9,7 @@ class PlayerApp : Application() {
 
     lateinit var playerStore: PlayerStore
     lateinit var legendStore: LegendStore
+    lateinit var trophyStore: TrophyStore
 
 
     override fun onCreate() {
@@ -17,6 +18,7 @@ class PlayerApp : Application() {
         //playerStore = PlayerMemStore()
         playerStore = PlayerJSONStore(applicationContext)
         legendStore = LegendJSONStore(applicationContext)
+        trophyStore = TrophyJSONStore(applicationContext)
 
         Log.v("Team Tracker","Team Tracker App started")
     }

@@ -42,7 +42,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
         ft = supportFragmentManager.beginTransaction()
 
-        val fragment = HomeFragment.newInstance()
+            val fragment = HomeFragment.newInstance()
         ft.replace(R.id.homeFrame, fragment)
         ft.commit()
     }
@@ -56,9 +56,8 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
             R.id.nav_team -> navigateTo(PlayerListFragment.newInstance())
             R.id.nav_history -> navigateTo(HistoryFragment.newInstance())
 
-            R.id.nav_history-> toast("You Selected Club History")
-            R.id.nav_addTrophies-> toast("You Selected Add Trophies")
-            R.id.nav_trophies-> toast("You Selected Club Trophies")
+            R.id.nav_addTrophies-> navigateTo(TrophyFragment.newInstance())
+            R.id.nav_trophies -> navigateTo(TrophyListFragment.newInstance())
 
             R.id.nav_addLegends -> navigateTo(LegendFragment.newInstance())
             R.id.nav_legends -> navigateTo(LegendListFragment.newInstance())

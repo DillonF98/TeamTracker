@@ -34,13 +34,14 @@ class LegendJSONStore : LegendStore, AnkoLogger {
         return legends
     }
 
-    override fun findById(id: Long): LegendModel? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun create(legend: LegendModel) {
         legend.legendId = generateRandomLegendId()
         legends.add(legend)
+        serialize()
+    }
+
+    override fun delete(legend: LegendModel) {
+        legends.remove(legend)
         serialize()
     }
 

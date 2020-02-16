@@ -73,5 +73,16 @@
      </string>
 
 
+    <string name="action_addTrophy">Add Trophy</string>
+    <string name="hint_trophyName">Trophy Name</string>
+    <string name="hint_trophyAmount">Amount they have Won</string>
+    <string name="button_addTrophyImage">Add Trophy Image</string>
+    <string name="button_addTrophy">Add Trophy</string>
+    <string name="action_trophy">Trophies</string>
+    <string name="error_trophyName">Please Enter a trophy Name</string>
+    <string name="error_trophyText">Please Fill in all Fields</string>
+    <string name="error_text">Please Enter Text for all fields</string>
+
+
 </resources>
 

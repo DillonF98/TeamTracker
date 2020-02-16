@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import ie.wit.R
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.models.LegendModel
@@ -52,7 +53,14 @@ class LegendFragment : Fragment() {
             legend.trophiesWon = trophiesWon.text.toString()
             legend.yrsAtClub = yrsAtClub.text.toString()
 
+            if (legend.legendName.isNotEmpty() && legend.caps.isNotEmpty() && legend.trophiesWon.isNotEmpty() && legend.yrsAtClub.isNotEmpty()) {
+
             app.legendStore.create(legend.copy())
+
+            }
+            else {
+                Toast.makeText(app, R.string.error_text, Toast.LENGTH_LONG).show()
+            }
 
             legend.legendName = lName.setText("").toString()
             legend.caps = caps.setText("").toString()

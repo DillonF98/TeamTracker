@@ -10,14 +10,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.R
 import ie.wit.teamtracker.adapters.LegendAdapter
-import ie.wit.teamtracker.adapters.PlayerAdapter
+import ie.wit.teamtracker.adapters.LegendListener
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.models.LegendModel
-import ie.wit.teamtracker.models.PlayerModel
+import kotlinx.android.synthetic.main.fragment_legend_list.*
+import kotlinx.android.synthetic.main.fragment_legend_list.view.*
 import kotlinx.android.synthetic.main.fragment_player_list.*
 import kotlinx.android.synthetic.main.fragment_player_list.view.*
 
-class LegendListFragment : Fragment() {
+@Suppress("UNREACHABLE_CODE")
+class LegendListFragment : Fragment(), LegendListener {
 
     lateinit var app: PlayerApp
 
@@ -35,8 +37,8 @@ class LegendListFragment : Fragment() {
         activity?.title = getString(R.string.action_legends)
 
 
-        root.recyclerView.layoutManager = LinearLayoutManager(activity)
-        root.recyclerView.adapter = LegendAdapter(app.legendStore.findAll())
+        root.legendRecyclerView.layoutManager = LinearLayoutManager(activity)
+        root.legendRecyclerView.adapter = LegendAdapter(app.legendStore.findAll(), this)
 
         return root
         loadLegends()
@@ -57,13 +59,18 @@ class LegendListFragment : Fragment() {
     }
 
     private fun showLegends (legends: List<LegendModel>) {
-        recyclerView.adapter = LegendAdapter(legends)
-        recyclerView.adapter?.notifyDataSetChanged()
+        legendRecyclerView.adapter = LegendAdapter(legends,this )
+        legendRecyclerView.adapter?.notifyDataSetChanged()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         loadLegends()
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onLegendClick(legend: LegendModel) {
+        app.legendStore.delete(legend)
+        loadLegends()
     }
 
 }

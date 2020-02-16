@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".teamtracker.fragments.PlayerListFragment">
+    tools:context=".teamtracker.fragments.TrophyListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/playerRecyclerView"
+        android:id="@+id/trophyRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"

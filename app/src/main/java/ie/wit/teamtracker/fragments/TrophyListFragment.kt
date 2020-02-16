@@ -11,14 +11,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.R
 import ie.wit.teamtracker.adapters.PlayerAdapter
 import ie.wit.teamtracker.adapters.PlayerListener
+import ie.wit.teamtracker.adapters.TrophyAdapter
+import ie.wit.teamtracker.adapters.TrophyListener
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.models.PlayerModel
+import ie.wit.teamtracker.models.TrophyModel
 import kotlinx.android.synthetic.main.card_player.view.*
 import kotlinx.android.synthetic.main.fragment_player_list.*
 import kotlinx.android.synthetic.main.fragment_player_list.view.*
+import kotlinx.android.synthetic.main.fragment_trophy_list.*
+import kotlinx.android.synthetic.main.fragment_trophy_list.view.*
 
-@Suppress("UNREACHABLE_CODE")
-class PlayerListFragment : Fragment(), PlayerListener {
+class TrophyListFragment : Fragment(), TrophyListener {
 
     lateinit var app: PlayerApp
 
@@ -33,17 +37,15 @@ class PlayerListFragment : Fragment(), PlayerListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var root = inflater.inflate(R.layout.fragment_player_list, container, false)
-        activity?.title = getString(R.string.action_team)
+        var root = inflater.inflate(R.layout.fragment_trophy_list, container, false)
+        activity?.title = getString(R.string.action_trophy)
 
 
-        root.playerRecyclerView.layoutManager = LinearLayoutManager(activity)
-        root.playerRecyclerView.adapter = PlayerAdapter(app.playerStore.findAll(), this)
-
-        //deletePlayerButton(root)
+        root.trophyRecyclerView.layoutManager = LinearLayoutManager(activity)
+        root.trophyRecyclerView.adapter = TrophyAdapter(app.trophyStore.findAll(), this)
 
         return root
-        loadPlayers()
+        loadTrophys()
 
 
     }
@@ -51,39 +53,30 @@ class PlayerListFragment : Fragment(), PlayerListener {
     companion object {
         @JvmStatic
         fun newInstance() =
-            PlayerListFragment().apply {
+            TrophyListFragment().apply {
                 arguments = Bundle().apply { }
             }
     }
 
-    override fun onPlayerClick(player: PlayerModel) {
-        app.playerStore.delete(player)
-        loadPlayers()
+    override fun onTrophyClick(trophy: TrophyModel) {
+        app.trophyStore.delete(trophy)
+        loadTrophys()
     }
 
-    private fun loadPlayers() {
-        showPlayers(app.playerStore.findAll())
+    private fun loadTrophys() {
+        showTrophys(app.trophyStore.findAll())
     }
 
-    private fun showPlayers (players: List<PlayerModel>) {
-        playerRecyclerView.adapter = PlayerAdapter(players,this)
-        playerRecyclerView.adapter?.notifyDataSetChanged()
+    private fun showTrophys (trophys: List<TrophyModel>) {
+        trophyRecyclerView.adapter = TrophyAdapter(trophys,this)
+        trophyRecyclerView.adapter?.notifyDataSetChanged()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        loadPlayers()
+        loadTrophys()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun deletePlayerButton(layout: View, player: PlayerModel){
-
-        layout.deleteButton.setOnClickListener{
-            app.playerStore.delete(player)
-
-
-        }
-
-    }
 
 
 
