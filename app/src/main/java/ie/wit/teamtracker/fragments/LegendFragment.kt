@@ -32,7 +32,6 @@ class LegendFragment : Fragment() {
         activity?.title = getString(R.string.action_addLegend)
         setButtonListener(root)
 
-
         return root
     }
 
@@ -59,7 +58,6 @@ class LegendFragment : Fragment() {
             legend.caps = caps.setText("").toString()
             legend.trophiesWon = trophiesWon.setText("").toString()
             legend.yrsAtClub = yrsAtClub.setText("").toString()
-
 
         }
     }

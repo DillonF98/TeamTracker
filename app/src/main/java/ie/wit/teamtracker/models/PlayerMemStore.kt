@@ -27,7 +27,11 @@ class PlayerMemStore : PlayerStore {
             logAll()
         }
 
-        fun logAll() {
+    override fun delete(player: PlayerModel) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun logAll() {
             Log.v("Player","** Player List **")
             players.forEach { Log.v("Player","${it}") }
         }

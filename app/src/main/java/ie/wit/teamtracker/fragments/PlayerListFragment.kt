@@ -10,18 +10,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.R
 import ie.wit.teamtracker.adapters.PlayerAdapter
+import ie.wit.teamtracker.adapters.PlayerListener
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.models.PlayerModel
+import kotlinx.android.synthetic.main.card_player.view.*
 import kotlinx.android.synthetic.main.fragment_player_list.*
 import kotlinx.android.synthetic.main.fragment_player_list.view.*
 
-class PlayerListFragment : Fragment() {
+class PlayerListFragment : Fragment(), PlayerListener {
 
     lateinit var app: PlayerApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as PlayerApp
+
     }
 
     override fun onCreateView(
@@ -34,7 +37,9 @@ class PlayerListFragment : Fragment() {
 
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
-        root.recyclerView.adapter = PlayerAdapter(app.playerStore.findAll())
+        root.recyclerView.adapter = PlayerAdapter(app.playerStore.findAll(), this)
+
+        //deletePlayerButton(root)
 
         return root
         loadPlayers()
@@ -50,12 +55,17 @@ class PlayerListFragment : Fragment() {
             }
     }
 
+    override fun onPlayerClick(player: PlayerModel) {
+        app.playerStore.delete(player)
+        loadPlayers()
+    }
+
     private fun loadPlayers() {
         showPlayers(app.playerStore.findAll())
     }
 
     private fun showPlayers (players: List<PlayerModel>) {
-        recyclerView.adapter = PlayerAdapter(players)
+        recyclerView.adapter = PlayerAdapter(players,this)
         recyclerView.adapter?.notifyDataSetChanged()
     }
 
@@ -63,5 +73,17 @@ class PlayerListFragment : Fragment() {
         loadPlayers()
         super.onActivityResult(requestCode, resultCode, data)
     }
+
+    fun deletePlayerButton(layout: View, player: PlayerModel){
+
+        layout.deleteButton.setOnClickListener{
+            app.playerStore.delete(player)
+
+
+        }
+
+    }
+
+
 
 }

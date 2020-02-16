@@ -34,13 +34,18 @@ class PlayerJSONStore : PlayerStore, AnkoLogger {
         return players
     }
 
-    override fun findById(id: Long): PlayerModel? {
+    override fun findById(id: Long): PlayerModel{
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun create(player: PlayerModel) {
         player.id = generateRandomId()
         players.add(player)
+        serialize()
+    }
+
+    override fun delete(player: PlayerModel) {
+        players.remove(player)
         serialize()
     }
 
