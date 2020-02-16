@@ -32,6 +32,8 @@ class LegendListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var root = inflater.inflate(R.layout.fragment_legend_list, container, false)
+        activity?.title = getString(R.string.action_legends)
+
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
         root.recyclerView.adapter = LegendAdapter(app.legendStore.findAll())

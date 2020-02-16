@@ -29,7 +29,7 @@ class LegendFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_legend, container, false)
-        activity?.title = getString(R.string.action_legend)
+        activity?.title = getString(R.string.action_addLegend)
         setButtonListener(root)
 
 

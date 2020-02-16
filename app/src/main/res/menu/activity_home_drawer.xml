@@ -11,7 +11,6 @@
         <item
             android:id="@+id/nav_player"
             android:icon="@drawable/ic_menu_addplayer"
-
             android:title="@string/menu_player" />
         <item
             android:id="@+id/nav_team"
@@ -25,7 +24,7 @@
 
             <item
                 android:id="@+id/nav_history"
-                android:icon="@drawable/ic_menu_archive"
+                android:icon="@drawable/ic_menu_overview"
                 android:title="@string/menu_history" />
             <item
                 android:id="@+id/nav_addTrophies"
@@ -34,7 +33,7 @@
 
             <item
                 android:id="@+id/nav_trophies"
-                android:icon="@drawable/ic_menu_archive"
+                android:icon="@mipmap/ic_menu_trophy3"
                 android:title="@string/menu_trophies" />
         </menu>
 
@@ -45,12 +44,12 @@
 
             <item
                 android:id="@+id/nav_addLegends"
-                android:icon="@drawable/ic_menu_archive"
+                android:icon="@drawable/ic_menu_addplayer"
                 android:title="@string/menu_addLegends" />
 
             <item
                 android:id="@+id/nav_legends"
-                android:icon="@drawable/ic_menu_archive"
+                android:icon="@drawable/ic_menu_star"
                 android:title="@string/menu_legends" />
         </menu>
     </item>

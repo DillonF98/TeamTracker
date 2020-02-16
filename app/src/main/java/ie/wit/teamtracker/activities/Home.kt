@@ -11,10 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import ie.wit.R
-import ie.wit.teamtracker.fragments.LegendFragment
-import ie.wit.teamtracker.fragments.LegendListFragment
-import ie.wit.teamtracker.fragments.PlayerFragment
-import ie.wit.teamtracker.fragments.PlayerListFragment
+import ie.wit.teamtracker.fragments.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.home.*
 import org.jetbrains.anko.toast
@@ -45,7 +42,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
         ft = supportFragmentManager.beginTransaction()
 
-        val fragment = PlayerListFragment.newInstance()
+        val fragment = HomeFragment.newInstance()
         ft.replace(R.id.homeFrame, fragment)
         ft.commit()
     }
@@ -54,9 +51,10 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
         when (item.itemId) {
 
-            R.id.nav_home-> toast("You Selected Home")
+            R.id.nav_home-> navigateTo(HomeFragment.newInstance())
             R.id.nav_player -> navigateTo(PlayerFragment.newInstance())
             R.id.nav_team -> navigateTo(PlayerListFragment.newInstance())
+            R.id.nav_history -> navigateTo(HistoryFragment.newInstance())
 
             R.id.nav_history-> toast("You Selected Club History")
             R.id.nav_addTrophies-> toast("You Selected Add Trophies")

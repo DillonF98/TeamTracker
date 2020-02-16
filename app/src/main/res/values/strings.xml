@@ -22,10 +22,10 @@
     <string name="menu_legends">Legends</string>
     <string name="menu_history">Overview</string>
     <string name="menu_trophies">Club Trophies</string>
-    <string name="menu_addTrophies">Add Trophie</string>
+    <string name="menu_addTrophies">Add Trophy</string>
 
     <string name="hint_name">Enter Name</string>
-    <string name="hint_position">Enter position</string>
+    <string name="hint_position">Enter Position</string>
     <string name="hint_age">Enter Age</string>
     <string name="hint_yearsigned">Enter Year Signed</string>
     <string name="hint_signingvalue">Enter Value Signed For</string>
@@ -47,8 +47,30 @@
     <string name="button_addLegend">Add Legend</string>
     <string name="button_addLegendImage">Add Legend Image</string>
 
-    <string name="action_legend">Legend</string>
+    <string name="action_legend">Legends</string>
+    <string name="action_home">Home</string>
+    <string name="action_addLegend">Add Legend</string>
+    <string name="action_history">History</string>
+    <string name="action_legends">Legends</string>
+    <string name="action_team">Team</string>
 
+    <string name="text_home">Welcome to Liverpool FC Team Tracker</string>
+    <string name="text_home2">An App Developed for the Fans to Cater for the Latest Information and Facts</string>
+
+    <string name="text_overview1">Since they were founded in 1892, the Liverpool Football Club name was synonymous with fame and glory.
+        Internationally, Liverpool is the most successful British club of all time with plenty of European trophies on their record.
+        They are one of the most popular football teams in the world, with over 200 supporter clubs in at least 50 different countries.
+        Liverpool Football Club was formed following a disagreement between the Everton Football Committee, who oversaw the city of Liverpools
+        oldest professional football club, and John Houlding, who owned Anfield, the land used for games.</string>
+
+    <string name="text_overview2">Houlding originally wanted to name the team Everton Athletic to spite the former committee, but the English Football Association wouldnt allow it. So instead, the team adopted the moniker,
+        Liverpoool F.C, The team quickly rose through the ranks of English Football, winning the Lancashire league, then the Second division, gaining entrance
+        to the First Division, English Footballs highest league.  </string>
+
+    <string name="text_overview3">They won it twice in the span of 5 years, 1901 and 1906. While the league did not have the
+        competitive nature it does now, the accomplishment was no small feat. These crucial years would help establish Liverpool as a team to be respected, though
+        far from the dominance they would enjoy later in their tenure.
+     </string>
 
 
 </resources>

@@ -30,6 +30,8 @@ class PlayerListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var root = inflater.inflate(R.layout.fragment_player_list, container, false)
+        activity?.title = getString(R.string.action_team)
+
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
         root.recyclerView.adapter = PlayerAdapter(app.playerStore.findAll())
