@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 import ie.wit.R
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.utils.createLoader
@@ -174,6 +175,8 @@ class Login : AppCompatActivity(), View.OnClickListener {
             signedInButtons.visibility = View.VISIBLE
 
             verifyEmailButton.isEnabled = !user.isEmailVerified
+
+            app.database = FirebaseDatabase.getInstance().reference
 
             startActivity<Home>()
         } else {

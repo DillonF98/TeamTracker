@@ -33,6 +33,7 @@ class PlayerAdapter constructor(private var players: List<PlayerModel>,
 
     override fun getItemCount(): Int = players.size
 
+
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(player: PlayerModel, listener: PlayerListener) {

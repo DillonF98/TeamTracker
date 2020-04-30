@@ -6,17 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import ie.wit.R
 import ie.wit.teamtracker.main.PlayerApp
+import ie.wit.teamtracker.models.PlayerModel
 import ie.wit.teamtracker.models.TrophyModel
+import ie.wit.teamtracker.utils.createLoader
+import ie.wit.teamtracker.utils.hideLoader
+import ie.wit.teamtracker.utils.showLoader
+import kotlinx.android.synthetic.main.fragment_player.view.*
 import kotlinx.android.synthetic.main.fragment_trophy.*
 import kotlinx.android.synthetic.main.fragment_trophy.view.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 
 
-class TrophyFragment : Fragment() {
+class TrophyFragment : Fragment(), AnkoLogger {
 
     lateinit var app: PlayerApp
-    var trophy = TrophyModel()
+    lateinit var loader: AlertDialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +39,8 @@ class TrophyFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_trophy, container, false)
         activity?.title = getString(R.string.action_addTrophy)
-        setTrophyButtonListener(root)
+        loader = createLoader(activity!!)
+        setButtonListener(root)
 
         return root
     }
@@ -44,26 +53,57 @@ class TrophyFragment : Fragment() {
             }
     }
 
-    private fun setTrophyButtonListener(layout: View) {
+    private fun setButtonListener(layout: View) {
 
         layout.addTrophyButton.setOnClickListener {
 
-            trophy.trophyName = tName.text.toString()
-            trophy.trophyAmount = tAmount.text.toString()
+            val trophyName = tName.text.toString()
+            val trophyAmount = tAmount.text.toString()
 
-            if (trophy.trophyName.isNotEmpty()){
+            when {
+                layout.tName.text.isEmpty() -> Toast.makeText(app, R.string.error_tname, Toast.LENGTH_LONG).show()
+                layout.tAmount.text.isEmpty() -> Toast.makeText(app, R.string.error_tAmount, Toast.LENGTH_LONG).show()
 
-                app.trophyStore.create(trophy.copy())
+
+                else -> {
+                    writeNewTrophy(
+                        TrophyModel(
+                            trophyName = trophyName,
+                            trophyAmount = trophyAmount,
+                            email = app.auth.currentUser?.email
+                        )
+                    )
+                }
             }
 
-            else{
-                Toast.makeText(app, R.string.error_trophyText, Toast.LENGTH_LONG).show()
-            }
 
-            trophy.trophyName = tName.setText("").toString()
-            trophy.trophyAmount = tAmount.setText("").toString()
+            layout.tName.setText("")
+            layout.tAmount.setText("")
 
         }
+    }
+
+
+    fun writeNewTrophy(trophy: TrophyModel) {
+
+        // Create new trophy at /trophys & /trophys/$uid
+        showLoader(loader, "Adding Trophy to Firebase")
+        info("Firebase DB Reference : $app.database")
+        val uid = app.auth.currentUser!!.uid
+        val key = app.database.child("trophys").push().key
+        if (key == null) {
+            info("Firebase Error : Key Empty")
+            return
+        }
+        trophy.uid = key
+        val trophyValues = trophy.toMap()
+
+        val childUpdates = HashMap<String, Any>()
+        childUpdates["/trophys/$key"] = trophyValues
+        childUpdates["/user-trophys/$uid/$key"] = trophyValues
+
+        app.database.updateChildren(childUpdates)
+        hideLoader(loader)
     }
 
 }
