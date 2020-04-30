@@ -12,18 +12,25 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import ie.wit.R
 import ie.wit.teamtracker.fragments.*
+import ie.wit.teamtracker.main.PlayerApp
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.home.*
+import kotlinx.android.synthetic.main.nav_header_home.view.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var ft: FragmentTransaction
+    lateinit var app: PlayerApp
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
         setSupportActionBar(toolbar)
+
+        app = application as PlayerApp
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Corner Taken Quickly ORIGI!!!!!!!!!",
@@ -40,9 +47,12 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.email
+        navView.getHeaderView(0).nav_header_name.text = app.auth.currentUser?.displayName
+
         ft = supportFragmentManager.beginTransaction()
 
-            val fragment = HomeFragment.newInstance()
+        val fragment = HomeFragment.newInstance()
         ft.replace(R.id.homeFrame, fragment)
         ft.commit()
     }
@@ -61,7 +71,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
             R.id.nav_addLegends -> navigateTo(LegendFragment.newInstance())
             R.id.nav_legends -> navigateTo(LegendListFragment.newInstance())
-
+            R.id.nav_sign_out -> signOut()
 
             else -> toast("You Selected Something Else")
         }
@@ -77,7 +87,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.closeDrawer(GravityCompat.START)
-         else
+        else
             super.onBackPressed()
     }
 
@@ -86,5 +96,11 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
             .replace(R.id.homeFrame, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun signOut() {
+        app.auth.signOut()
+        startActivity<Login>()
+        finish()
     }
 }
