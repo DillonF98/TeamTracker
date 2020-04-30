@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -16,9 +19,7 @@ import ie.wit.teamtracker.adapters.PlayerAdapter
 import ie.wit.teamtracker.adapters.PlayerListener
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.models.PlayerModel
-import ie.wit.teamtracker.utils.createLoader
-import ie.wit.teamtracker.utils.hideLoader
-import ie.wit.teamtracker.utils.showLoader
+import ie.wit.teamtracker.utils.*
 import kotlinx.android.synthetic.main.fragment_player_list.*
 import kotlinx.android.synthetic.main.fragment_player_list.view.*
 import org.jetbrains.anko.AnkoLogger
@@ -30,14 +31,11 @@ class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
     lateinit var loader : AlertDialog
     lateinit var root: View
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as PlayerApp
 
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,11 +47,70 @@ class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
         activity?.title = getString(R.string.action_team)
 
         root.playerRecyclerView.layoutManager = LinearLayoutManager(activity)
+
+
+        val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val adapter = root.playerRecyclerView.adapter as PlayerAdapter
+                adapter.removeAt(viewHolder.adapterPosition)
+                deletePlayer((viewHolder.itemView.tag as PlayerModel ).uid)
+                deleteUserPlayer(app.auth.currentUser!!.uid,(viewHolder.itemView.tag as PlayerModel).uid)
+            }
+        }
+        val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
+        itemTouchDeleteHelper.attachToRecyclerView(root.playerRecyclerView)
+
+        val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                onPlayerClick(viewHolder.itemView.tag as PlayerModel)
+            }
+        }
+        val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
+        itemTouchEditHelper.attachToRecyclerView(root.playerRecyclerView)
+
         return root
 
     }
 
+    open fun setSwipeRefresh() {
+        root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
+            override fun onRefresh() {
+                root.swiperefresh.isRefreshing = true
+                getAllPlayers(app.auth.currentUser!!.uid)
+            }
+        })
+    }
 
+    fun checkSwipeRefresh() {
+        if (root.swiperefresh.isRefreshing) root.swiperefresh.isRefreshing = false
+    }
+
+    fun deleteUserPlayer(userId: String, uid: String?) {
+        app.database.child("user-players").child(userId).child(uid!!)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.removeValue()
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        info("Firebase Player error : ${error.message}")
+                    }
+                })
+    }
+
+    fun deletePlayer(uid: String?) {
+        app.database.child("players").child(uid!!)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.removeValue()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        info("Firebase Player error : ${error.message}")
+                    }
+                })
+    }
     companion object {
         @JvmStatic
         fun newInstance() =
@@ -85,14 +142,14 @@ class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
                     hideLoader(loader)
                     val children = snapshot.children
                     children.forEach {
-                        val legend = it.
+                        val player = it.
                         getValue<PlayerModel>(PlayerModel::class.java)
 
-                        playersList.add(legend!!)
+                        playersList.add(player!!)
                         root.playerRecyclerView.adapter =
                             PlayerAdapter(playersList, this@PlayerListFragment)
                         root.playerRecyclerView.adapter?.notifyDataSetChanged()
-
+                        checkSwipeRefresh()
 
                         app.database.child("user-players").child(userId)
                             .removeEventListener(this)

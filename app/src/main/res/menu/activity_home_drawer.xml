@@ -51,19 +51,12 @@
                 android:id="@+id/nav_legends"
                 android:icon="@drawable/ic_menu_star"
                 android:title="@string/menu_legends" />
+            <item
+                android:id="@+id/nav_sign_out"
+                android:icon="@android:drawable/ic_menu_revert"
+                android:title="@string/menu_signOut" />
         </menu>
     </item>
-
-    <menu>
-
-        <item
-            android:id="@+id/nav_sign_out"
-            android:icon="@drawable/ic_menu_addplayer"
-            android:title="@string/menu_addLegends" />
-    </menu>
-
-
-
 
     </menu>
 

@@ -12,7 +12,7 @@ interface PlayerListener {
     fun onPlayerClick(player: PlayerModel)
 }
 
-class PlayerAdapter constructor(private var players: List<PlayerModel>,
+class PlayerAdapter constructor(private var players: ArrayList<PlayerModel>,
                                 private val listener: PlayerListener)
     : RecyclerView.Adapter<PlayerAdapter.MainHolder>() {
 
@@ -34,6 +34,11 @@ class PlayerAdapter constructor(private var players: List<PlayerModel>,
     override fun getItemCount(): Int = players.size
 
 
+    fun removeAt(position: Int) {
+        players.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(player: PlayerModel, listener: PlayerListener) {
@@ -45,4 +50,5 @@ class PlayerAdapter constructor(private var players: List<PlayerModel>,
 
         }
     }
+
 }
