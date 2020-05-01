@@ -37,6 +37,7 @@ class LegendAdapter constructor(private var legends: List<LegendModel>, private 
 
         fun bind(legend: LegendModel, listener: LegendListener) {
 
+            itemView.tag = legend
             itemView.lName.text = legend.legendName
             itemView.caps.text = legend.caps
             itemView.lTrophies.text = legend.trophiesWon

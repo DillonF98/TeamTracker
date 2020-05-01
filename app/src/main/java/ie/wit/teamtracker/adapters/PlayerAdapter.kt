@@ -43,6 +43,7 @@ class PlayerAdapter constructor(private var players: ArrayList<PlayerModel>,
 
         fun bind(player: PlayerModel, listener: PlayerListener) {
 
+            itemView.tag = player
             itemView.name.text = player.name
             itemView.age.text = player.age
             itemView.position.text = player.position

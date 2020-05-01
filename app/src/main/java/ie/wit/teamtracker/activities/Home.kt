@@ -65,10 +65,8 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
             R.id.nav_player -> navigateTo(PlayerFragment.newInstance())
             R.id.nav_team -> navigateTo(PlayerListFragment.newInstance())
             R.id.nav_history -> navigateTo(HistoryFragment.newInstance())
-
             R.id.nav_addTrophies-> navigateTo(TrophyFragment.newInstance())
             R.id.nav_trophies -> navigateTo(TrophyListFragment.newInstance())
-
             R.id.nav_addLegends -> navigateTo(LegendFragment.newInstance())
             R.id.nav_legends -> navigateTo(LegendListFragment.newInstance())
             R.id.nav_sign_out -> signOut()

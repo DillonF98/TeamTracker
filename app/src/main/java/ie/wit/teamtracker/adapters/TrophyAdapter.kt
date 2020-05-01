@@ -36,6 +36,7 @@ class TrophyAdapter constructor(private var trophys: List<TrophyModel>, private 
 
         fun bind(trophy: TrophyModel, listener: TrophyListener) {
 
+            itemView.tag = trophy
             itemView.tName.text = trophy.trophyName
             itemView.tAmount.text = trophy.trophyAmount
             itemView.setOnClickListener{listener.onTrophyClick(trophy)}
