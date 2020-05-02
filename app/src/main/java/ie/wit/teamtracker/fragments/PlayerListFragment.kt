@@ -47,7 +47,7 @@ class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
         activity?.title = getString(R.string.action_team)
 
         root.playerRecyclerView.layoutManager = LinearLayoutManager(activity)
-
+        setSwipeRefresh()
 
         val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -70,6 +70,19 @@ class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
 
         return root
 
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            PlayerListFragment().apply {
+                arguments = Bundle().apply { }
+            }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getAllPlayers(app.auth.currentUser!!.uid)
     }
 
     open fun setSwipeRefresh() {
@@ -111,21 +124,9 @@ class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
                     }
                 })
     }
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            PlayerListFragment().apply {
-                arguments = Bundle().apply { }
-            }
-    }
-
 
     override fun onPlayerClick(player: PlayerModel) {
-    }
 
-    override fun onResume() {
-        super.onResume()
-        getAllPlayers(app.auth.currentUser!!.uid)
     }
 
     fun getAllPlayers(userId: String?) {

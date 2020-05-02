@@ -126,6 +126,9 @@
     <string name="select_profile_image">Select Profile Image</string>
     <string name="nav_header_email">Email</string>
     <string name="menu_signOut">Sign Out</string>
+    <string name="action_player_edit">Edit Player</string>
+    <string name="button_editPlayer">Edit Player</string>
+    <string name="button_editPlayerImage">Edit Player Image</string>
 
 
     <!--END Firebase Resources-->

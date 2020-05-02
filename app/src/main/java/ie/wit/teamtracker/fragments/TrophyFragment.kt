@@ -7,16 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import ie.wit.R
+import ie.wit.teamtracker.adapters.PlayerAdapter
+import ie.wit.teamtracker.adapters.TrophyAdapter
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.models.PlayerModel
 import ie.wit.teamtracker.models.TrophyModel
-import ie.wit.teamtracker.utils.createLoader
-import ie.wit.teamtracker.utils.hideLoader
-import ie.wit.teamtracker.utils.showLoader
+import ie.wit.teamtracker.utils.*
 import kotlinx.android.synthetic.main.fragment_player.view.*
+import kotlinx.android.synthetic.main.fragment_player_list.view.*
 import kotlinx.android.synthetic.main.fragment_trophy.*
 import kotlinx.android.synthetic.main.fragment_trophy.view.*
+import kotlinx.android.synthetic.main.fragment_trophy_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -40,6 +44,7 @@ class TrophyFragment : Fragment(), AnkoLogger {
         val root = inflater.inflate(R.layout.fragment_trophy, container, false)
         activity?.title = getString(R.string.action_addTrophy)
         loader = createLoader(activity!!)
+
         setButtonListener(root)
 
         return root

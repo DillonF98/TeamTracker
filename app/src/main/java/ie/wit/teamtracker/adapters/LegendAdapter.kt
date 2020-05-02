@@ -1,3 +1,4 @@
+
 package ie.wit.teamtracker.adapters
 
 import android.view.LayoutInflater
@@ -6,14 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ie.wit.R
 import ie.wit.teamtracker.models.LegendModel
-import ie.wit.teamtracker.models.PlayerModel
 import kotlinx.android.synthetic.main.card_legend.view.*
-
 
 interface LegendListener {
     fun onLegendClick(legend: LegendModel)
 }
-class LegendAdapter constructor(private var legends: List<LegendModel>, private val listener: LegendListener)
+
+class LegendAdapter constructor(private var legends: ArrayList<LegendModel>,
+                                private val listener: LegendListener)
     : RecyclerView.Adapter<LegendAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -33,6 +34,12 @@ class LegendAdapter constructor(private var legends: List<LegendModel>, private 
 
     override fun getItemCount(): Int = legends.size
 
+
+    fun removeAt(position: Int) {
+        legends.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(legend: LegendModel, listener: LegendListener) {
@@ -46,4 +53,6 @@ class LegendAdapter constructor(private var legends: List<LegendModel>, private 
 
         }
     }
+
 }
+

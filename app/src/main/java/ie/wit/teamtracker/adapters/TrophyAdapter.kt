@@ -12,7 +12,8 @@ interface TrophyListener {
     fun onTrophyClick(trophy: TrophyModel)
 }
 
-class TrophyAdapter constructor(private var trophys: List<TrophyModel>, private val listener: TrophyListener)
+class TrophyAdapter constructor(private var trophys: ArrayList<TrophyModel>,
+                                private val listener: TrophyListener)
     : RecyclerView.Adapter<TrophyAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -32,6 +33,12 @@ class TrophyAdapter constructor(private var trophys: List<TrophyModel>, private 
 
     override fun getItemCount(): Int = trophys.size
 
+
+    fun removeAt(position: Int) {
+        trophys.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(trophy: TrophyModel, listener: TrophyListener) {
@@ -41,7 +48,7 @@ class TrophyAdapter constructor(private var trophys: List<TrophyModel>, private 
             itemView.tAmount.text = trophy.trophyAmount
             itemView.setOnClickListener{listener.onTrophyClick(trophy)}
 
-
         }
     }
+
 }

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".teamtracker.fragments.EditPlayerFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/editPImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:src="@mipmap/ic_launcher_round" />
+
+            <Button
+                android:id="@+id/editPlayerImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="@string/button_editPlayerImage" />
+
+            <EditText
+                android:id="@+id/editPName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/hint_name"
+                android:inputType="textPersonName"
+                android:autofillHints="" />
+
+            <EditText
+                android:id="@+id/editPPosition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/hint_position"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/editPAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/hint_age"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editPCurrentValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/hint_currentvalue"
+                android:inputType="number"
+                android:autofillHints="" />
+
+            <EditText
+                android:id="@+id/editPSigningValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/hint_signingvalue"
+                android:inputType="number"
+                android:autofillHints="" />
+
+            <EditText
+                android:id="@+id/editPYearSigned"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/hint_yearsigned"
+                android:inputType="number"
+                android:autofillHints="" />
+
+            <EditText
+                android:id="@+id/editPNationality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/hint_nationality"
+                android:inputType="textPersonName"
+                android:autofillHints="" />
+
+            <Button
+                android:id="@+id/editPlayerButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="@string/button_editPlayer" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
