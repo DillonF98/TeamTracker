@@ -1,5 +1,7 @@
 package ie.wit.teamtracker.fragments
 
+import PlayerAdapter
+import PlayerListener
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,13 +11,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ie.wit.R
-import ie.wit.teamtracker.adapters.PlayerAdapter
-import ie.wit.teamtracker.adapters.PlayerListener
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.models.PlayerModel
 import ie.wit.teamtracker.utils.*
@@ -45,12 +46,20 @@ open class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
         activity?.title = getString(R.string.action_team)
 
         root.playerRecyclerView.layoutManager = LinearLayoutManager(activity)
-        setSwipeRefresh()
+
+        var query = FirebaseDatabase.getInstance()
+            .reference
+            .child("user-players").child(app.currentUser.uid)
+
+        var options = FirebaseRecyclerOptions.Builder<PlayerModel>()
+            .setQuery(query, PlayerModel::class.java)
+            .setLifecycleOwner(this)
+            .build()
+
+        root.playerRecyclerView.adapter = PlayerAdapter(options, this)
 
         val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = root.playerRecyclerView.adapter as PlayerAdapter
-                adapter.removeAt(viewHolder.adapterPosition)
                 deletePlayer((viewHolder.itemView.tag as PlayerModel ).uid)
                 deleteUserPlayer(app.currentUser.uid,(viewHolder.itemView.tag as PlayerModel).uid)
             }
@@ -77,20 +86,6 @@ open class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
                 arguments = Bundle().apply { }
             }
     }
-
-    open fun setSwipeRefresh() {
-        root.playerSwipeRefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
-            override fun onRefresh() {
-                root.playerSwipeRefresh.isRefreshing = true
-                getAllPlayers(app.currentUser.uid)
-            }
-        })
-    }
-
-    fun checkSwipeRefresh() {
-        if (root.playerSwipeRefresh.isRefreshing) root.playerSwipeRefresh.isRefreshing = false
-    }
-
     fun deleteUserPlayer(userId: String, uid: String?) {
         app.database.child("user-players").child(userId).child(uid!!)
             .addListenerForSingleValueEvent(
@@ -123,42 +118,6 @@ open class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
             .replace(R.id.homeFrame, EditPlayerFragment.newInstance(player))
             .addToBackStack(null)
             .commit()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if(this::class == PlayerListFragment::class)
-            getAllPlayers(app.currentUser.uid)
-    }
-
-    fun getAllPlayers(userId: String?) {
-        loader = createLoader(activity!!)
-        showLoader(loader, "Downloading Players from Firebase")
-        val playersList = ArrayList<PlayerModel>()
-        app.database.child("user-players").child(userId!!)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    info("Firebase Player error : ${error.message}")
-                }
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    hideLoader(loader)
-                    val children = snapshot.children
-                    children.forEach {
-                        val player = it.
-                        getValue<PlayerModel>(PlayerModel::class.java)
-
-                        playersList.add(player!!)
-                        root.playerRecyclerView.adapter =
-                            PlayerAdapter(playersList, this@PlayerListFragment, false)
-                        root.playerRecyclerView.adapter?.notifyDataSetChanged()
-                        checkSwipeRefresh()
-
-                        app.database.child("user-players").child(userId)
-                            .removeEventListener(this)
-                    }
-                }
-            })
     }
 
 }

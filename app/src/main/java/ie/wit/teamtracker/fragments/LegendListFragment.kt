@@ -17,14 +17,10 @@ import com.google.firebase.database.ValueEventListener
 import ie.wit.R
 import ie.wit.teamtracker.adapters.LegendAdapter
 import ie.wit.teamtracker.adapters.LegendListener
-import ie.wit.teamtracker.adapters.PlayerAdapter
-import ie.wit.teamtracker.adapters.PlayerListener
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.models.LegendModel
-import ie.wit.teamtracker.models.PlayerModel
 import ie.wit.teamtracker.utils.*
 import kotlinx.android.synthetic.main.fragment_legend_list.view.*
-import kotlinx.android.synthetic.main.fragment_player_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 

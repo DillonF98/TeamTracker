@@ -1,6 +1,5 @@
 package ie.wit.teamtracker.activities
 
-import ie.wit.teamtracker.activities.Login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.wit.R
-import ie.wit.fragments.PlayersAllFragment
+import ie.wit.teamtracker.fragments.PlayersAllFragment
 import ie.wit.teamtracker.fragments.*
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.utils.*
