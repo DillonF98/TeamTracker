@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import ie.wit.R
 import ie.wit.teamtracker.activities.Home
 import ie.wit.teamtracker.main.PlayerApp
@@ -210,6 +211,8 @@ class Login : AppCompatActivity(), View.OnClickListener {
 
             verifyEmailButton.isEnabled = !user.isEmailVerified
             app.database = FirebaseDatabase.getInstance().reference
+            app.storage = FirebaseStorage.getInstance().reference
+
 
             startActivity<Home>()
         } else {
