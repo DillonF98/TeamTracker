@@ -40,7 +40,7 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/nav_header_email"
@@ -51,7 +51,7 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorWhite"
-                android:textSize="18sp" />
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/nav_header_name"
@@ -61,7 +61,7 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorWhite"
-                android:textSize="18sp" />
+                android:textSize="10sp" />
         </LinearLayout>
 
     </LinearLayout>

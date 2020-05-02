@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import ie.wit.R
+import ie.wit.activities.Login
 import ie.wit.teamtracker.fragments.*
 import ie.wit.teamtracker.main.PlayerApp
 import kotlinx.android.synthetic.main.app_bar_home.*
@@ -97,8 +98,10 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
     }
 
     private fun signOut() {
-        app.auth.signOut()
-        startActivity<Login>()
-        finish()
+        app.googleSignInClient.signOut().addOnCompleteListener(this) {
+            app.auth.signOut()
+            startActivity<Login>()
+            finish()
+        }
     }
 }
