@@ -1,5 +1,6 @@
 package ie.wit.teamtracker.activities
 
+import ie.wit.teamtracker.activities.Login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,12 +10,12 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.wit.R
-import ie.wit.activities.Login
 import ie.wit.fragments.PlayersAllFragment
 import ie.wit.teamtracker.fragments.*
 import ie.wit.teamtracker.main.PlayerApp
@@ -54,8 +55,15 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.email
-        navView.getHeaderView(0).nav_header_name.text = app.auth.currentUser?.displayName
+        if(app.currentUser.email != null)
+            navView.getHeaderView(0).nav_header_email.text = app.currentUser.email
+        else
+            navView.getHeaderView(0).nav_header_email.text = "No Email Specified..."
+
+        if(app.currentUser.displayName != null)
+            navView.getHeaderView(0).nav_header_name.text = app.currentUser.displayName
+            else
+            navView.getHeaderView(0).nav_header_name.text = "No Name Specified..."
 
         //Checking if Google User, upload google profile pic
         checkExistingPhoto(app,this)
@@ -111,11 +119,10 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
     }
 
     private fun signOut() {
-        app.googleSignInClient.signOut().addOnCompleteListener(this) {
-            app.auth.signOut()
-            startActivity<Login>()
-            finish()
-        }
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener { startActivity<Login>() }
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

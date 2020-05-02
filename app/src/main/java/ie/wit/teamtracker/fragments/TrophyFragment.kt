@@ -75,7 +75,7 @@ class TrophyFragment : Fragment(), AnkoLogger {
                         TrophyModel(
                             trophyName = trophyName,
                             trophyAmount = trophyAmount,
-                            email = app.auth.currentUser?.email
+                            email = app.currentUser.email
                         )
                     )
                 }
@@ -94,7 +94,7 @@ class TrophyFragment : Fragment(), AnkoLogger {
         // Create new trophy at /trophys & /trophys/$uid
         showLoader(loader, "Adding Trophy to Firebase")
         info("Firebase DB Reference : $app.database")
-        val uid = app.auth.currentUser!!.uid
+        val uid = app.currentUser.uid
         val key = app.database.child("trophys").push().key
         if (key == null) {
             info("Firebase Error : Key Empty")

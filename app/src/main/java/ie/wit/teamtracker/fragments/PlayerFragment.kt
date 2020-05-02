@@ -58,7 +58,7 @@ class PlayerFragment : Fragment(), AnkoLogger {
         // Create new player at /players & /players/$uid
         showLoader(loader, "Adding Player to Firebase")
         info("Firebase DB Reference : $app.database")
-        val uid = app.auth.currentUser!!.uid
+        val uid = app.currentUser.uid
         val key = app.database.child("players").push().key
         if (key == null) {
             info("Firebase Error : Key Empty")
@@ -108,7 +108,7 @@ class PlayerFragment : Fragment(), AnkoLogger {
                             signingValue = signingValue,
                             position = position,
                             nationality = nationality,
-                            email = app.auth.currentUser?.email
+                            email = app.currentUser.email
                         )
                     )
                 }

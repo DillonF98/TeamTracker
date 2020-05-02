@@ -58,7 +58,8 @@ class EditPlayerFragment : Fragment(), AnkoLogger {
             showLoader(loader, "Updating Player on Server...")
             updatePlayerData()
             updatePlayer(editPlayer!!.uid, editPlayer!!)
-            updateUserPlayer(app.auth.currentUser!!.uid,
+            updateUserPlayer(
+                app.currentUser.uid,
                                editPlayer!!.uid, editPlayer!!)
         }
 

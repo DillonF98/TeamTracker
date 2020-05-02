@@ -52,7 +52,7 @@ open class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
                 val adapter = root.playerRecyclerView.adapter as PlayerAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
                 deletePlayer((viewHolder.itemView.tag as PlayerModel ).uid)
-                deleteUserPlayer(app.auth.currentUser!!.uid,(viewHolder.itemView.tag as PlayerModel).uid)
+                deleteUserPlayer(app.currentUser.uid,(viewHolder.itemView.tag as PlayerModel).uid)
             }
         }
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
@@ -82,7 +82,7 @@ open class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
         root.playerSwipeRefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.playerSwipeRefresh.isRefreshing = true
-                getAllPlayers(app.auth.currentUser!!.uid)
+                getAllPlayers(app.currentUser.uid)
             }
         })
     }
@@ -128,7 +128,7 @@ open class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
     override fun onResume() {
         super.onResume()
         if(this::class == PlayerListFragment::class)
-            getAllPlayers(app.auth.currentUser!!.uid)
+            getAllPlayers(app.currentUser.uid)
     }
 
     fun getAllPlayers(userId: String?) {

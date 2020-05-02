@@ -133,6 +133,10 @@
     <string name="menu_players_all">All Players</string>
     <string name="menu_players">Players</string>
 
+    <string name="sign_in_google">Sign In with Google</string>
+    <string name="sign_in_email">Sign In with Email</string>
+    <string name="sign_in_phone">Sign In with Phone</string>
+
 
     <!--END Firebase Resources-->
 

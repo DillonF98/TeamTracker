@@ -5,12 +5,14 @@ import android.net.Uri
 import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
 
 class PlayerApp : Application() {
 
-    lateinit var auth: FirebaseAuth
+    //lateinit var auth: FirebaseAuth
+    lateinit var currentUser: FirebaseUser
     lateinit var database: DatabaseReference
     lateinit var googleSignInClient: GoogleSignInClient
     lateinit var storage: StorageReference

@@ -52,7 +52,8 @@ class EditTrophyFragment : Fragment(), AnkoLogger {
             showLoader(loader, "Updating Trophy on Server...")
             updateTrophyData()
             updateTrophy(editTrophy!!.uid, editTrophy!!)
-            updateUserTrophy(app.auth.currentUser!!.uid,
+            updateUserTrophy(
+                app.currentUser.uid,
                 editTrophy!!.uid, editTrophy!!)
         }
 

@@ -57,7 +57,8 @@ class EditLegendFragment : Fragment(), AnkoLogger {
             showLoader(loader, "Updating Legend on Server...")
             updateLegendData()
             updateLegend(editLegend!!.uid, editLegend!!)
-            updateUserLegend(app.auth.currentUser!!.uid,
+            updateUserLegend(
+                app.currentUser.uid,
                 editLegend!!.uid, editLegend!!)
         }
 

@@ -55,7 +55,7 @@ class LegendListFragment : Fragment(), AnkoLogger, LegendListener {
                 val adapter = root.legendRecyclerView.adapter as LegendAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
                 deleteLegend((viewHolder.itemView.tag as LegendModel ).uid)
-                deleteUserLegend(app.auth.currentUser!!.uid,(viewHolder.itemView.tag as LegendModel).uid)
+                deleteUserLegend(app.currentUser.uid,(viewHolder.itemView.tag as LegendModel).uid)
             }
         }
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
@@ -82,13 +82,13 @@ class LegendListFragment : Fragment(), AnkoLogger, LegendListener {
 
     override fun onResume() {
         super.onResume()
-        getAllLegends(app.auth.currentUser!!.uid)
+        getAllLegends(app.currentUser.uid)
     }
     open fun setSwipeRefresh() {
         root.legendswiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.legendswiperefresh.isRefreshing = true
-                getAllLegends(app.auth.currentUser!!.uid)
+                getAllLegends(app.currentUser.uid)
             }
         })
     }

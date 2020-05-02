@@ -60,7 +60,7 @@ class TrophyListFragment : Fragment(), AnkoLogger, TrophyListener  {
                 val adapter = root.trophyRecyclerView.adapter as TrophyAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
                 deleteTrophy((viewHolder.itemView.tag as TrophyModel ).uid)
-                deleteUserTrophy(app.auth.currentUser!!.uid,(viewHolder.itemView.tag as TrophyModel).uid)
+                deleteUserTrophy(app.currentUser.uid,(viewHolder.itemView.tag as TrophyModel).uid)
             }
         }
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
@@ -87,14 +87,14 @@ class TrophyListFragment : Fragment(), AnkoLogger, TrophyListener  {
 
     override fun onResume() {
         super.onResume()
-        getAllTrophys(app.auth.currentUser!!.uid)
+        getAllTrophys(app.currentUser.uid)
     }
 
     open fun setSwipeRefresh() {
         root.trophyswiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.trophyswiperefresh.isRefreshing = true
-                getAllTrophys(app.auth.currentUser!!.uid)
+                getAllTrophys(app.currentUser.uid)
             }
         })
     }

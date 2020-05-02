@@ -53,7 +53,7 @@ class LegendFragment : Fragment(), AnkoLogger {
         // Create new legend at /legends & /legends/$uid
         showLoader(loader, "Adding Legend to Firebase")
         info("Firebase DB Reference : $app.database")
-        val uid = app.auth.currentUser!!.uid
+        val uid = app.currentUser.uid
         val key = app.database.child("legends").push().key
         if (key == null) {
             info("Firebase Error : Key Empty")
@@ -86,7 +86,7 @@ class LegendFragment : Fragment(), AnkoLogger {
                             caps = caps,
                             trophiesWon = trophiesWon,
                             yrsAtClub =yrsAtClub,
-                            email = app.auth.currentUser?.email
+                            email = app.currentUser.email
                         )
                     )
                 }
