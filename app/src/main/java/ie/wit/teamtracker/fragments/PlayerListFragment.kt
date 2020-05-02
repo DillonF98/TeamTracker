@@ -126,7 +126,10 @@ class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
     }
 
     override fun onPlayerClick(player: PlayerModel) {
-
+        activity!!.supportFragmentManager.beginTransaction()
+            .replace(R.id.homeFrame, EditPlayerFragment.newInstance(player))
+            .addToBackStack(null)
+            .commit()
     }
 
     fun getAllPlayers(userId: String?) {

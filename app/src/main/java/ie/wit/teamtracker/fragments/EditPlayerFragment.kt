@@ -16,7 +16,7 @@ import ie.wit.teamtracker.models.PlayerModel
 import ie.wit.teamtracker.utils.createLoader
 import ie.wit.teamtracker.utils.hideLoader
 import ie.wit.teamtracker.utils.showLoader
-import kotlinx.android.synthetic.main.fragment_player_editt.view.*
+import kotlinx.android.synthetic.main.fragment_player_edit.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -42,7 +42,7 @@ class EditPlayerFragment : Fragment(), AnkoLogger {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_player_detail, container, false)
+        root = inflater.inflate(R.layout.fragment_player_edit, container, false)
         activity?.title = getString(R.string.action_player_edit)
         loader = createLoader(activity!!)
 

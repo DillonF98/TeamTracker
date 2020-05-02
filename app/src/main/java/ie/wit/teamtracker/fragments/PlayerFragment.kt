@@ -37,7 +37,7 @@ class PlayerFragment : Fragment(), AnkoLogger {
 
         val root = inflater.inflate(R.layout.fragment_player, container, false)
         loader = createLoader(activity!!)
-        activity?.title = getString(R.string.action_player)
+        activity?.title = getString(R.string.action_legend_edit)
 
         setButtonListener(root)
 

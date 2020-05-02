@@ -130,6 +130,10 @@ class TrophyListFragment : Fragment(), AnkoLogger, TrophyListener  {
     }
 
     override fun onTrophyClick(trophy: TrophyModel) {
+        activity!!.supportFragmentManager.beginTransaction()
+            .replace(R.id.homeFrame, EditTrophyFragment.newInstance(trophy))
+            .addToBackStack(null)
+            .commit()
     }
 
 

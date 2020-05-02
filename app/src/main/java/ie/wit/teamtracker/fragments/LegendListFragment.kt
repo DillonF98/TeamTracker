@@ -157,7 +157,10 @@ class LegendListFragment : Fragment(), AnkoLogger, LegendListener {
     }
 
     override fun onLegendClick(legend: LegendModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        activity!!.supportFragmentManager.beginTransaction()
+            .replace(R.id.homeFrame, EditLegendFragment.newInstance(legend))
+            .addToBackStack(null)
+            .commit()
     }
 
 
