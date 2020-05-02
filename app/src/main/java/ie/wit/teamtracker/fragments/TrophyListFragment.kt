@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ie.wit.R
 import ie.wit.teamtracker.adapters.TrophyAdapter
@@ -21,6 +23,7 @@ import ie.wit.teamtracker.adapters.TrophyListener
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.models.TrophyModel
 import ie.wit.teamtracker.utils.*
+import kotlinx.android.synthetic.main.fragment_legend_list.view.*
 import kotlinx.android.synthetic.main.fragment_trophy_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -46,12 +49,20 @@ class TrophyListFragment : Fragment(), AnkoLogger, TrophyListener  {
         activity?.title = getString(R.string.action_trophy)
 
         root.trophyRecyclerView.layoutManager = LinearLayoutManager(activity)
-        setSwipeRefresh()
+
+        var query = FirebaseDatabase.getInstance()
+            .reference
+            .child("user-trophys").child(app.currentUser.uid)
+
+        var options = FirebaseRecyclerOptions.Builder<TrophyModel>()
+            .setQuery(query, TrophyModel::class.java)
+            .setLifecycleOwner(this)
+            .build()
+
+        root.trophyRecyclerView.adapter = TrophyAdapter(options, this)
 
         val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = root.trophyRecyclerView.adapter as TrophyAdapter
-                adapter.removeAt(viewHolder.adapterPosition)
                 deleteTrophy((viewHolder.itemView.tag as TrophyModel ).uid)
                 deleteUserTrophy(app.currentUser.uid,(viewHolder.itemView.tag as TrophyModel).uid)
             }
@@ -76,24 +87,6 @@ class TrophyListFragment : Fragment(), AnkoLogger, TrophyListener  {
             TrophyListFragment().apply {
                 arguments = Bundle().apply { }
             }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getAllTrophys(app.currentUser.uid)
-    }
-
-    open fun setSwipeRefresh() {
-        root.trophyswiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
-            override fun onRefresh() {
-                root.trophyswiperefresh.isRefreshing = true
-                getAllTrophys(app.currentUser.uid)
-            }
-        })
-    }
-
-    fun checkSwipeRefresh() {
-        if (root.trophyswiperefresh.isRefreshing) root.trophyswiperefresh.isRefreshing = false
     }
 
     fun deleteUserTrophy(userId: String, uid: String?) {
@@ -128,39 +121,4 @@ class TrophyListFragment : Fragment(), AnkoLogger, TrophyListener  {
             .addToBackStack(null)
             .commit()
     }
-
-
-    fun getAllTrophys(userId: String?) {
-        loader = createLoader(activity!!)
-        showLoader(loader, "Downloading Trophys from Firebase")
-        val trophysList = ArrayList<TrophyModel>()
-        app.database.child("user-trophys").child(userId!!)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    info("Firebase Trophy error : ${error.message}")
-                }
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    hideLoader(loader)
-                    val children = snapshot.children
-                    children.forEach {
-                        val trophy = it.
-                        getValue<TrophyModel>(TrophyModel::class.java)
-
-                        trophysList.add(trophy!!)
-                        root.trophyRecyclerView.adapter =
-                            TrophyAdapter(trophysList, this@TrophyListFragment)
-                        root.trophyRecyclerView.adapter?.notifyDataSetChanged()
-                        checkSwipeRefresh()
-
-                        app.database.child("user-trophys").child(userId)
-                            .removeEventListener(this)
-                    }
-                }
-            })
-    }
-
-
-
-
 }

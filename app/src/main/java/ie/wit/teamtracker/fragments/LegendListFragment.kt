@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ie.wit.R
 import ie.wit.teamtracker.adapters.LegendAdapter
@@ -44,12 +46,20 @@ class LegendListFragment : Fragment(), AnkoLogger, LegendListener {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_legend_list, container, false)
         activity?.title = getString(R.string.action_legends)
-        setSwipeRefresh()
+
+        var query = FirebaseDatabase.getInstance()
+            .reference
+            .child("user-legends").child(app.currentUser.uid)
+
+        var options = FirebaseRecyclerOptions.Builder<LegendModel>()
+            .setQuery(query, LegendModel::class.java)
+            .setLifecycleOwner(this)
+            .build()
+
+        root.legendRecyclerView.adapter = LegendAdapter(options, this)
 
         val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = root.legendRecyclerView.adapter as LegendAdapter
-                adapter.removeAt(viewHolder.adapterPosition)
                 deleteLegend((viewHolder.itemView.tag as LegendModel ).uid)
                 deleteUserLegend(app.currentUser.uid,(viewHolder.itemView.tag as LegendModel).uid)
             }
@@ -74,23 +84,6 @@ class LegendListFragment : Fragment(), AnkoLogger, LegendListener {
             LegendListFragment().apply {
                 arguments = Bundle().apply { }
             }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getAllLegends(app.currentUser.uid)
-    }
-    open fun setSwipeRefresh() {
-        root.legendswiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
-            override fun onRefresh() {
-                root.legendswiperefresh.isRefreshing = true
-                getAllLegends(app.currentUser.uid)
-            }
-        })
-    }
-
-    fun checkSwipeRefresh() {
-        if (root.legendswiperefresh.isRefreshing) root.legendswiperefresh.isRefreshing = false
     }
 
     fun deleteUserLegend(userId: String, uid: String?) {
@@ -121,36 +114,6 @@ class LegendListFragment : Fragment(), AnkoLogger, LegendListener {
     }
 
 
-
-    fun getAllLegends(userId: String?) {
-        loader = createLoader(activity!!)
-        showLoader(loader, "Downloading Legends from Firebase")
-        val legendsList = ArrayList<LegendModel>()
-        app.database.child("user-legends").child(userId!!)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    info("Firebase Legend error : ${error.message}")
-                }
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    hideLoader(loader)
-                    val children = snapshot.children
-                    children.forEach {
-                        val legend = it.getValue<LegendModel>(LegendModel::class.java)
-                        legendsList.add(legend!!)
-                        root.legendRecyclerView.adapter =
-                            LegendAdapter(legendsList, this@LegendListFragment)
-                        root.legendRecyclerView.adapter?.notifyDataSetChanged()
-                        checkSwipeRefresh()
-
-
-
-                        app.database.child("user-legends").child(userId)
-                            .removeEventListener(this)
-                    }
-                }
-            })
-    }
 
     override fun onLegendClick(legend: LegendModel) {
         activity!!.supportFragmentManager.beginTransaction()
