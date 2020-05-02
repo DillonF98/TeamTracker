@@ -130,6 +130,8 @@
     <string name="button_editPlayerImage">Edit Player Image</string>
     <string name="action_player">Player</string>
     <string name="action_trophy_edit">Edit Trophy</string>
+    <string name="menu_players_all">All Players</string>
+    <string name="menu_players">Players</string>
 
 
     <!--END Firebase Resources-->

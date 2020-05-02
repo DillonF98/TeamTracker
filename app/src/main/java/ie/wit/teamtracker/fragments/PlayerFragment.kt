@@ -52,6 +52,7 @@ class PlayerFragment : Fragment(), AnkoLogger {
             }
     }
 
+
     fun writeNewPlayer(player: PlayerModel) {
 
         // Create new player at /players & /players/$uid

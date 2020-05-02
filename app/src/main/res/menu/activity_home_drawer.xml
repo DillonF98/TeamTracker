@@ -13,9 +13,13 @@
             android:icon="@drawable/ic_menu_addplayer"
             android:title="@string/menu_player" />
         <item
-            android:id="@+id/nav_team"
+            android:id="@+id/nav_players"
             android:icon="@drawable/ic_menu_ppl"
-            android:title="@string/menu_team" />
+            android:title="@string/menu_players" />
+        <item
+            android:id="@+id/nav_players_all"
+            android:icon="@drawable/ic_menu_list"
+            android:title="@string/menu_players_all" />
 
     </group>
 

@@ -15,6 +15,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.wit.R
 import ie.wit.activities.Login
+import ie.wit.fragments.PlayersAllFragment
 import ie.wit.teamtracker.fragments.*
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.utils.*
@@ -75,7 +76,8 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
             R.id.nav_home-> navigateTo(HomeFragment.newInstance())
             R.id.nav_player -> navigateTo(PlayerFragment.newInstance())
-            R.id.nav_team -> navigateTo(PlayerListFragment.newInstance())
+            R.id.nav_players -> navigateTo(PlayerListFragment.newInstance())
+            R.id.nav_players_all -> navigateTo(PlayersAllFragment.newInstance())
             R.id.nav_history -> navigateTo(HistoryFragment.newInstance())
             R.id.nav_addTrophies-> navigateTo(TrophyFragment.newInstance())
             R.id.nav_trophies -> navigateTo(TrophyListFragment.newInstance())

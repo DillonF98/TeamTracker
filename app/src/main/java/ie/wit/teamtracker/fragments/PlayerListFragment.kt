@@ -1,6 +1,5 @@
 package ie.wit.teamtracker.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,12 +19,11 @@ import ie.wit.teamtracker.adapters.PlayerListener
 import ie.wit.teamtracker.main.PlayerApp
 import ie.wit.teamtracker.models.PlayerModel
 import ie.wit.teamtracker.utils.*
-import kotlinx.android.synthetic.main.fragment_player_list.*
 import kotlinx.android.synthetic.main.fragment_player_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
+open class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
 
     lateinit var app: PlayerApp
     lateinit var loader : AlertDialog
@@ -80,22 +78,17 @@ class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
             }
     }
 
-    override fun onResume() {
-        super.onResume()
-        getAllPlayers(app.auth.currentUser!!.uid)
-    }
-
     open fun setSwipeRefresh() {
-        root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
+        root.playerSwipeRefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
-                root.swiperefresh.isRefreshing = true
+                root.playerSwipeRefresh.isRefreshing = true
                 getAllPlayers(app.auth.currentUser!!.uid)
             }
         })
     }
 
     fun checkSwipeRefresh() {
-        if (root.swiperefresh.isRefreshing) root.swiperefresh.isRefreshing = false
+        if (root.playerSwipeRefresh.isRefreshing) root.playerSwipeRefresh.isRefreshing = false
     }
 
     fun deleteUserPlayer(userId: String, uid: String?) {
@@ -132,6 +125,12 @@ class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
             .commit()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(this::class == PlayerListFragment::class)
+            getAllPlayers(app.auth.currentUser!!.uid)
+    }
+
     fun getAllPlayers(userId: String?) {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading Players from Firebase")
@@ -151,7 +150,7 @@ class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
 
                         playersList.add(player!!)
                         root.playerRecyclerView.adapter =
-                            PlayerAdapter(playersList, this@PlayerListFragment)
+                            PlayerAdapter(playersList, this@PlayerListFragment, false)
                         root.playerRecyclerView.adapter?.notifyDataSetChanged()
                         checkSwipeRefresh()
 
