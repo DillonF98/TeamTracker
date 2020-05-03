@@ -43,7 +43,7 @@ open class PlayerListFragment : Fragment(), AnkoLogger, PlayerListener {
 
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_player_list, container, false)
-        activity?.title = getString(R.string.action_team)
+        activity?.title = getString(R.string.action_players)
 
         root.playerRecyclerView.layoutManager = LinearLayoutManager(activity)
 

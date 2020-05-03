@@ -37,7 +37,7 @@ class PlayerFragment : Fragment(), AnkoLogger {
 
         val root = inflater.inflate(R.layout.fragment_player, container, false)
         loader = createLoader(activity!!)
-        activity?.title = getString(R.string.action_legend_edit)
+        activity?.title = getString(R.string.action_player_add)
 
         setButtonListener(root)
 
@@ -86,7 +86,6 @@ class PlayerFragment : Fragment(), AnkoLogger {
             val signingValue = pSigningValue.text.toString()
             val currentValue = pCurrentValue.text.toString()
             val nationality = pNationality.text.toString()
-            val uid = pNationality.text.toString()
 
 
             when {

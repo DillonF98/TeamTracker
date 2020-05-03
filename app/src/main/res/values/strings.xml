@@ -136,6 +136,23 @@
     <string name="sign_in_google">Sign In with Google</string>
     <string name="sign_in_email">Sign In with Email</string>
     <string name="sign_in_phone">Sign In with Phone</string>
+    <string name="hint_date">Enter Date</string>
+    <string name="hint_title">Enter Title</string>
+    <string name="hint_desc">Enter Description</string>
+    <string name="button_editFan">Edit Fan Moment</string>
+    <string name="button_addFan">Add Fan Moment</string>
+    <string name="action_fan_moment">Fan Moments</string>
+    <string name="action_fan_moment_edit">Edit Fan Moment</string>
+    <string name="menu_fan_moments_all">All Fan Moments</string>
+    <string name="menu_add_fan_moment">Add Fan Moment</string>
+    <string name="menu_fan_moments">Fan Moments</string>
+    <string name="error_title">Please enter a name</string>
+    <string name="error_date">Please enter a title</string>
+    <string name="error_desc">Please enter a description</string>
+    <string name="favourites_title">Favourite Fan Moments</string>
+    <string name="menu_favourites">Favourites</string>
+    <string name="action_players">Players</string>
+    <string name="action_player_add">Add Player</string>
 
 
     <!--END Firebase Resources-->
